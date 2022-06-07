@@ -49,8 +49,9 @@ public class JwtAuthorizationFilter implements Filter {
 			cm.setData(null);
 
 			String result = om.writeValueAsString(cm);
-
+			resp.setContentType("application/json; charset=utf-8");
 			PrintWriter out = resp.getWriter();
+
 			out.println(result);
 			out.flush();
 		} else {
@@ -69,6 +70,7 @@ public class JwtAuthorizationFilter implements Filter {
 				chain.doFilter(req, resp); // 다시 체인을 타게 해야 한다.
 			} catch (Exception e) {
 				e.printStackTrace();
+				resp.setContentType("application/json; charset=utf-8");
 				PrintWriter out = resp.getWriter();
 				CMRespDto<?> cm = new CMRespDto<>();
 				cm.setCode(-1);
