@@ -18,6 +18,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.cos.authjwt.domain.user.User;
 import com.cos.authjwt.domain.user.UserRepository;
 import com.cos.authjwt.handler.ex.CustomApiException;
+import com.cos.authjwt.web.dto.CMRespDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,14 +37,21 @@ public class JwtAuthorizationFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-
+		ObjectMapper om = new ObjectMapper();
 		String jwtToken = req.getHeader(JwtProps.HEADER);
 
 		System.out.println("토큰 : " + jwtToken);
 
 		if (jwtToken == null) {
+			CMRespDto<?> cm = new CMRespDto<>();
+			cm.setCode(-1);
+			cm.setMsg("jwtToken not found");
+			cm.setData(null);
+
+			String result = om.writeValueAsString(cm);
+
 			PrintWriter out = resp.getWriter();
-			out.println("jwtToken not found");
+			out.println(result);
 			out.flush();
 		} else {
 			jwtToken = jwtToken.replace(JwtProps.AUTH, "");
@@ -61,7 +70,13 @@ public class JwtAuthorizationFilter implements Filter {
 			} catch (Exception e) {
 				e.printStackTrace();
 				PrintWriter out = resp.getWriter();
-				out.println("verify fail");
+				CMRespDto<?> cm = new CMRespDto<>();
+				cm.setCode(-1);
+				cm.setMsg("verify fail");
+				cm.setData(null);
+
+				String result = om.writeValueAsString(cm);
+				out.println(result);
 				out.flush();
 			}
 
