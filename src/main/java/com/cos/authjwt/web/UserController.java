@@ -28,7 +28,7 @@ public class UserController {
 	public ResponseEntity<?> join(@RequestBody User user) {
 
 		User userEntity = userService.회원가입(user);
-		return new ResponseEntity<>(new CMRespDto<>(1, "회원가입완료", userEntity), HttpStatus.CREATED);
+		return new ResponseEntity<>(new CMRespDto<>(1, "회원가입완료", null), HttpStatus.CREATED);
 	}
 
 	// @LoginUser로 세션정보 접근 가능!!
