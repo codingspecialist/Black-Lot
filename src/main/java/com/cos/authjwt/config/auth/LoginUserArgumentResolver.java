@@ -15,14 +15,14 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver{
+public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 	private final HttpSession session;
-	
+
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		boolean isPrincipalAnnotation = parameter.getParameterAnnotation(LoginUser.class) != null;
 		boolean isPrincipalClass = User.class.equals(parameter.getParameterType());
-		
+
 		return isPrincipalAnnotation && isPrincipalClass;
 	}
 
@@ -30,7 +30,7 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver{
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		User principal = (User) session.getAttribute("principal");
-		System.out.println("resolveArgument :  이거 걸림"+principal);
+		// System.out.println("resolveArgument : 이거 걸림"+principal);
 		return principal;
 	}
 }

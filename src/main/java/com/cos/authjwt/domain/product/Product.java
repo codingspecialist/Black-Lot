@@ -9,14 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.cos.authjwt.domain.picture.Picture;
 import com.cos.authjwt.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -40,9 +39,37 @@ public class Product {
     @Column(nullable = false)
     private Integer type;
 
-    @JoinColumn(name = "pictureId")
-    @OneToOne
-    private Picture Picture;
+    @Lob
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false)
+    private Integer count; // 개수
+
+    @Column(nullable = false)
+    private Integer price; // 가격
+
+    @Column(nullable = false)
+    private String texture; // 재질
+
+    @Column(nullable = false)
+    private String size; // 사이즈
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+    @Column(nullable = false)
+    private LocalDateTime productionDate;
+
+    @Column(nullable = false)
+    private String yearOfManufacture; // 제조년도
+
+    @Column(nullable = false)
+    private String country; // 국가
+
+    @Column(nullable = false)
+    private String signInfo; // 서명정보
+
+    @Column(nullable = false)
+    private boolean guarantee; // 보증서유무
 
     @JoinColumn(name = "userId")
     @ManyToOne

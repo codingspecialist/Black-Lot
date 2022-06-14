@@ -33,32 +33,32 @@ public class UserController {
 
 	// @LoginUser로 세션정보 접근 가능!!
 	@GetMapping("/user/{id}")
-	public CMRespDto<?> userinfo(@PathVariable Integer id, @LoginUser User principal) {
+	public ResponseEntity<?> userinfo(@PathVariable Integer id, @LoginUser User principal) {
 
 		if (principal.getId() == id) {
 			User userEntity = userService.회원정보보기(id);
-			return new CMRespDto<>(1, "회원정보확인완료", userEntity);
+			return new ResponseEntity<>(new CMRespDto<>(1, "회원정보확인완료", userEntity), HttpStatus.OK);
 		} else {
-			return new CMRespDto<>(-1, "권한이 없습니다.", null);
+			return new ResponseEntity<>(new CMRespDto<>(-1, "권한이 없습니다.", null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	// Test 용 (실제 앱에서 사용안함)
 	@PutMapping("/user/{id}")
-	public CMRespDto<?> userUpdate(@PathVariable Integer id, @RequestBody User user, @LoginUser User principal) {
+	public ResponseEntity<?> userUpdate(@PathVariable Integer id, @RequestBody User user, @LoginUser User principal) {
 
 		if (principal.getId() == id) {
-			return new CMRespDto<>(1, "회원정보수정완료", userService.회원수정(id, user));
+			return new ResponseEntity<>(new CMRespDto<>(1, "회원정보수정완료", userService.회원수정(id, user)), HttpStatus.OK);
 		} else {
-			return new CMRespDto<>(-1, "권한이 없습니다.", null);
+			return new ResponseEntity<>(new CMRespDto<>(-1, "권한이 없습니다.", null), HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	@GetMapping("/init/user")
-	public CMRespDto<?> initUser() {
-		return new CMRespDto<>(1, "목록보기완료", userService.회원목록보기());
+	public ResponseEntity<?> initUser() {
+		return new ResponseEntity<>(new CMRespDto<>(1, "목록보기완료", userService.회원목록보기()), HttpStatus.OK);
 	}
 
 }
