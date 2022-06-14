@@ -55,8 +55,9 @@ public class Product {
     @Column(nullable = false)
     private String size; // 사이즈
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     @Column(nullable = false)
-    private String productionTime; // 제작시기
+    private LocalDateTime productionDate;
 
     @Column(nullable = false)
     private String yearOfManufacture; // 제조년도

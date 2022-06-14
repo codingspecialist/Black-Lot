@@ -1,5 +1,6 @@
 package com.cos.authjwt.config;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,19 +32,19 @@ public class DBInitializer {
 			List<Product> products = new ArrayList<>();
 			products.add(Product.builder().type(0)
 					.title("제목1").count(1).price(4000000).texture("재질1").size("사이즈1")
-					.productionTime("현재").yearOfManufacture("2022년도").country("한국").signInfo("작품뒤에 서명")
+					.productionDate(LocalDateTime.now()).yearOfManufacture("2022년도").country("한국").signInfo("작품뒤에 서명")
 					.guarantee(true)
 					.user(userEntitys.get(0)).build());
 
 			products.add(Product.builder().type(0)
-					.title("제목1").count(1).price(4000000).texture("재질1").size("사이즈1")
-					.productionTime("현재").yearOfManufacture("2022년도").country("한국").signInfo("작품뒤에 서명")
+					.title("제목2").count(1).price(5000000).texture("재질2").size("사이즈3")
+					.productionDate(LocalDateTime.now()).yearOfManufacture("2022년도").country("한국").signInfo("작품뒤에 서명")
 					.guarantee(true)
 					.user(userEntitys.get(0)).build());
 
 			products.add(Product.builder().type(0)
-					.title("제목1").count(1).price(4000000).texture("재질1").size("사이즈1")
-					.productionTime("현재").yearOfManufacture("2022년도").country("한국").signInfo("작품뒤에 서명")
+					.title("제목3").count(1).price(4000000).texture("재질2").size("사이즈2")
+					.productionDate(LocalDateTime.now()).yearOfManufacture("2022년도").country("한국").signInfo("작품뒤에 서명")
 					.guarantee(true)
 					.user(userEntitys.get(1)).build());
 

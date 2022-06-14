@@ -54,14 +54,14 @@ public class JwtAuthenticationFilter implements Filter {
 			return;
 		}
 
-		System.out.println("로그인 인증 필터 JwtAuthenticationFilter 동작 시작");
+		// System.out.println("로그인 인증 필터 JwtAuthenticationFilter 동작 시작");
 
 		SimpleModule simpleModule = new SimpleModule();
 		simpleModule.addSerializer(LocalDateTime.class, new CustomLocalDateTimeSerializer());
 		om.registerModule(simpleModule);
 
 		LoginReqDto loginReqDto = om.readValue(req.getInputStream(), LoginReqDto.class);
-		System.out.println("다운 받은 데이터 : " + loginReqDto);
+		// System.out.println("다운 받은 데이터 : " + loginReqDto);
 
 		User principal = userRepository.findByUsernameAndPassword(loginReqDto.getUsername(), loginReqDto.getPassword());
 

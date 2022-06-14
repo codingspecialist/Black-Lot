@@ -33,14 +33,14 @@ public class JwtAuthorizationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("사용자 인가 필터 JwtAuthorizationFilter 동작 시작");
+		// System.out.println("사용자 인가 필터 JwtAuthorizationFilter 동작 시작");
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		ObjectMapper om = new ObjectMapper();
 		String jwtToken = req.getHeader(JwtProps.HEADER);
 
-		System.out.println("토큰 : " + jwtToken);
+		// System.out.println("토큰 : " + jwtToken);
 
 		if (jwtToken == null) {
 			CMRespDto<?> cm = new CMRespDto<>();
@@ -56,7 +56,7 @@ public class JwtAuthorizationFilter implements Filter {
 			out.flush();
 		} else {
 			jwtToken = jwtToken.replace(JwtProps.AUTH, "");
-			System.out.println("변경된 토큰 : " + jwtToken);
+
 			try {
 				DecodedJWT decodeJwt = JWT.require(Algorithm.HMAC512(JwtProps.SECRET)).build().verify(jwtToken);
 
@@ -64,7 +64,6 @@ public class JwtAuthorizationFilter implements Filter {
 				User principal = userRepository.findById(userId).orElseThrow(
 						() -> new CustomApiException("해당 유저 아이디 " + userId + "는 존재하지 않습니다"));
 
-				System.out.println("인가 필터 : principal : " + principal);
 				HttpSession session = req.getSession();
 				session.setAttribute("principal", principal);
 				chain.doFilter(req, resp); // 다시 체인을 타게 해야 한다.

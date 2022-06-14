@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ProductWriteReqDto {
+public class ProductUpdateReqDto {
 
     private Integer type;
     private String title;

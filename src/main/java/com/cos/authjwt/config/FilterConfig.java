@@ -42,7 +42,7 @@ public class FilterConfig {
 		FilterRegistrationBean<JwtAuthorizationFilter> bean = new FilterRegistrationBean<>(
 				new JwtAuthorizationFilter(userRepository));
 		// bean.addUrlPatterns("/post/*");
-		bean.addUrlPatterns("/user/*");
+		bean.addUrlPatterns("/s/*");
 
 		bean.setOrder(2); // 낮은 번호 부터 실행
 		return bean;
