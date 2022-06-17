@@ -17,6 +17,7 @@ public class ProductUpdateReqDto {
 
     private Integer type;
     private String title;
+    private String picture;
     private Integer count; // 개수
     private Integer price; // 가격
     private String texture; // 재질
@@ -31,6 +32,7 @@ public class ProductUpdateReqDto {
         Product product = new Product();
         product.setType(type);
         product.setTitle(title);
+        product.setPicture(picture);
         product.setCount(count);
         product.setPrice(price);
         product.setTexture(texture);

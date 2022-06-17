@@ -43,6 +43,10 @@ public class Product {
     @Column(nullable = false)
     private String title;
 
+    @Lob
+    @Column(nullable = false)
+    private String picture;
+
     @Column(nullable = false)
     private Integer count; // 개수
 
@@ -57,7 +61,7 @@ public class Product {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     @Column(nullable = false)
-    private LocalDateTime productionDate;
+    private LocalDateTime productionDate; // 제작시기
 
     @Column(nullable = false)
     private String yearOfManufacture; // 제조년도

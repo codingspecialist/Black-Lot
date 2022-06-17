@@ -57,6 +57,7 @@ public class ProductService {
             Product productEntity = productOp.get();
             productEntity.setType(productUpdateReqDto.getType());
             productEntity.setTitle(productUpdateReqDto.getTitle());
+            productEntity.setPicture(productUpdateReqDto.getPicture());
             productEntity.setCount(productUpdateReqDto.getCount());
             productEntity.setPrice(productUpdateReqDto.getPrice());
             productEntity.setTexture(productUpdateReqDto.getTexture());
